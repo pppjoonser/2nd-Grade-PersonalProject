@@ -5,8 +5,11 @@ public class EntityChecker : MonoBehaviour
 {
     [SerializeField]
     private float _serchingRadius;
+    public float SerchingRadius => _serchingRadius;
+
     [SerializeField, Range(0,360)]
     private float _serchingAngle;
+    public float SerchingAngle => _serchingAngle;
     [SerializeField]
     private LayerMask _targetType;
 
@@ -18,36 +21,13 @@ public class EntityChecker : MonoBehaviour
 
     [SerializeField]
     private Transform _forward;
-    protected void CheckingInRadious()
+    
+    public  Vector3 DirFromAngle(float angleInDegrees, bool _isGrobalRange)
     {
-        Collider[] enemyInRadious = Physics.OverlapSphere(transform.position, _serchingRadius, _targetType);
-        Vector3 forward = (_forward.position - transform.position).normalized;
-        foreach (Collider coll in enemyInRadious)
+        if (_isGrobalRange==false)
         {
-            Vector3 tDir = (coll.transform.position - transform.position).normalized;
-            float tDot = Vector3.Dot(tDir, forward);
-            if (tDot <= Mathf.Cos(_serchingAngle * Mathf.Deg2Rad))
-            {
-                float distanceToTarget = Vector3.Distance(transform.position, coll.transform.position);
-
-                if (Physics.Raycast(transform.position, tDir, out RaycastHit hit, Vector3.Distance(coll.transform.position, transform.position), _targetType))
-                {
-                    detectList.Add(coll);
-                }
-            }
+            angleInDegrees += transform.eulerAngles.y;
         }
-    }
-    protected void Seeking()
-    {
-        detectList.Clear();
-
-        foreach(Vector3 dir in dirList)
-        {
-            RaycastHit hit;
-            if(Physics.Raycast(transform.position,dir, out hit, _serchingRadius, _targetType))
-            {
-                detectList.Add(hit.collider);
-            }
-        }
+        return new Vector3(Mathf.Sin(angleInDegrees * Mathf.Deg2Rad), 0, Mathf.Cos(angleInDegrees * Mathf.Deg2Rad));
     }
 }
