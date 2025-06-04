@@ -8,10 +8,20 @@ using static KeyAction;
 [CreateAssetMenu(fileName = "InputReader", menuName = "Scriptable Objects/InputReader")]
 public class InputReader : ScriptableObject, IPlayerActions
 {
+    [SerializeField]
+    private LayerMask WhatIsGround;
     private KeyAction _playerInput;
+
     public event Action OnClick, OnCancleClick;
     public event Action<Vector2> OnMoveAction;
     public event Action OnMoveOrder;
+    public event Action OnInventoryPressed;
+    public event Action<bool> OnPressedCameraRotate;
+    public event Action<float> OnUpDownCameraPressed;
+
+    private Vector2 _screenPosition;
+    private Vector3 _worldPosition;
+
     public bool HoldingSelect { get; private set; } = false;
     public bool HoldingMultiSelect {  get; private set; } = false;
 
@@ -77,11 +87,6 @@ public class InputReader : ScriptableObject, IPlayerActions
         
     }
 
-    public void OnPrevious(InputAction.CallbackContext context)
-    {
-        
-    }
-
     public void OnSprint(InputAction.CallbackContext context)
     {
         if (context.performed)
@@ -90,4 +95,36 @@ public class InputReader : ScriptableObject, IPlayerActions
             HoldingMultiSelect = false;
     }
 
+    public Vector3 OnPointer(InputAction.CallbackContext context)
+    {
+        Camera mainCam = Camera.main;
+        Debug.Assert(mainCam != null, "No main camera in this scene");
+        Ray camRay = mainCam.ScreenPointToRay(_screenPosition);
+        if(Physics.Raycast(camRay, out RaycastHit hit , mainCam.farClipPlane, WhatIsGround))
+        {
+            _worldPosition = hit.point;
+        }
+
+        return _worldPosition;
+    }
+
+    public void OnInventory(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+            OnInventoryPressed?.Invoke();
+    }
+
+    public void OnUpDown(InputAction.CallbackContext context)
+    {
+        float val = context.ReadValue<float>();
+        OnUpDownCameraPressed?.Invoke(val);
+    }
+
+    public void OnRotate(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+            OnPressedCameraRotate?.Invoke(true);
+        else if(context.canceled)
+            OnPressedCameraRotate?.Invoke(false);
+    }
 }
