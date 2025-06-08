@@ -19,7 +19,7 @@ public class UnitController : MonoBehaviour
 
     private bool draging = false;
     private Vector2 startMousePosition;
-
+    private bool rotateOrderEnabled = false;
 
     private const float DRAG_FACTOR = 0.5f;
     private void Awake()
@@ -28,6 +28,12 @@ public class UnitController : MonoBehaviour
         _input.OnCancleClick += HandleCancleInputs;
         _input.OnMoveOrder += HandleMoveOrderInputs;
         _input.OnInventoryPressed += HandleInventoryOrderInputs;
+        _input.OnRotateOrderPressed += HandleRotateOrderInputs;
+    }
+
+    private void HandleRotateOrderInputs()
+    {
+        rotateOrderEnabled = ! rotateOrderEnabled;
     }
 
     private void HandleInventoryOrderInputs()
@@ -46,7 +52,15 @@ public class UnitController : MonoBehaviour
             {
                 foreach(SelectableUnit unit in SelectionManager.Instance.SelectedUnits)
                 {
-                    unit.MoveTo(hit.point);
+                    if(rotateOrderEnabled == false)
+                    {
+                        unit.MoveTo(hit.point);
+                    }
+                    else
+                    {
+                        unit.RotateTo(hit.point);
+                    }
+                    rotateOrderEnabled = false;
                 }
             }
         }

@@ -30,19 +30,34 @@ public class RealatedEquipmentSlot : EquipmentSlot
         {
             realatedSlot.itemImage = realatedSlot.GetComponent<Image>();
         }
-        if(item == null)
+
+        if(currentItem != null && currentItem.type == doubleEquipmentType)
         {
-            if(currentItem.type == doubleEquipmentType)
+            if(item == null)
+            {
+                realatedSlot.currentItem = null;
+                realatedSlot.itemImage.sprite = null;
+            }
+            else if(item.type == doubleEquipmentType)
             {
                 realatedSlot.currentItem = item;
+                realatedSlot.itemImage.sprite = item.itemImage;
+            }
+            else
+            {
+                realatedSlot.currentItem = null;
                 realatedSlot.itemImage.sprite = null;
             }
         }
-        else if (item.type == doubleEquipmentType)
+        else if(item != null)
         {
-            realatedSlot.currentItem = item;
-            realatedSlot.itemImage.sprite = (item != null ? item.itemImage : null);
+            if(item.type == doubleEquipmentType)
+            {
+                realatedSlot.currentItem = item;
+                realatedSlot.itemImage.sprite = item.itemImage;
+            }
         }
+
         currentItem = item;
         itemImage.sprite = (item != null ? item.itemImage : null);
     }

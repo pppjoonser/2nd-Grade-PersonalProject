@@ -18,6 +18,7 @@ public class InputReader : ScriptableObject, IPlayerActions
     public event Action OnInventoryPressed;
     public event Action<bool> OnPressedCameraRotate;
     public event Action<float> OnUpDownCameraPressed;
+    public event Action OnRotateOrderPressed;
 
     private Vector2 _screenPosition;
     private Vector3 _worldPosition;
@@ -126,5 +127,13 @@ public class InputReader : ScriptableObject, IPlayerActions
             OnPressedCameraRotate?.Invoke(true);
         else if(context.canceled)
             OnPressedCameraRotate?.Invoke(false);
+    }
+
+    public void OnRotateOrder(InputAction.CallbackContext context)
+    {
+        if(context.performed)
+        {
+            OnRotateOrderPressed?.Invoke();
+        }
     }
 }

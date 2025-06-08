@@ -125,6 +125,15 @@ public partial class @KeyAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""RotateOrder"",
+                    ""type"": ""Button"",
+                    ""id"": ""a9185ac6-80df-41e0-badb-5ee17c7aeb82"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -499,6 +508,17 @@ public partial class @KeyAction: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""32445120-8e65-4509-8657-d5acad4d3b26"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""RotateOrder"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -1097,6 +1117,7 @@ public partial class @KeyAction: IInputActionCollection2, IDisposable
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_UpDown = m_Player.FindAction("UpDown", throwIfNotFound: true);
         m_Player_Rotate = m_Player.FindAction("Rotate", throwIfNotFound: true);
+        m_Player_RotateOrder = m_Player.FindAction("RotateOrder", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1187,6 +1208,7 @@ public partial class @KeyAction: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_UpDown;
     private readonly InputAction m_Player_Rotate;
+    private readonly InputAction m_Player_RotateOrder;
     public struct PlayerActions
     {
         private @KeyAction m_Wrapper;
@@ -1202,6 +1224,7 @@ public partial class @KeyAction: IInputActionCollection2, IDisposable
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
         public InputAction @UpDown => m_Wrapper.m_Player_UpDown;
         public InputAction @Rotate => m_Wrapper.m_Player_Rotate;
+        public InputAction @RotateOrder => m_Wrapper.m_Player_RotateOrder;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -1244,6 +1267,9 @@ public partial class @KeyAction: IInputActionCollection2, IDisposable
             @Rotate.started += instance.OnRotate;
             @Rotate.performed += instance.OnRotate;
             @Rotate.canceled += instance.OnRotate;
+            @RotateOrder.started += instance.OnRotateOrder;
+            @RotateOrder.performed += instance.OnRotateOrder;
+            @RotateOrder.canceled += instance.OnRotateOrder;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -1281,6 +1307,9 @@ public partial class @KeyAction: IInputActionCollection2, IDisposable
             @Rotate.started -= instance.OnRotate;
             @Rotate.performed -= instance.OnRotate;
             @Rotate.canceled -= instance.OnRotate;
+            @RotateOrder.started -= instance.OnRotateOrder;
+            @RotateOrder.performed -= instance.OnRotateOrder;
+            @RotateOrder.canceled -= instance.OnRotateOrder;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -1474,6 +1503,7 @@ public partial class @KeyAction: IInputActionCollection2, IDisposable
         void OnSprint(InputAction.CallbackContext context);
         void OnUpDown(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
+        void OnRotateOrder(InputAction.CallbackContext context);
     }
     public interface IUIActions
     {
