@@ -277,7 +277,7 @@ MonoBehaviour:
   comboWindow: 0.7
   attackSpeedStat: {fileID: 0}
   meleeDamageStat: {fileID: 0}
-  damageCaster: {fileID: 0}
+  damageCaster: {fileID: 412065155041034332}
   useMouseDirection: 0
 --- !u!1 &6328743128728139821
 GameObject:
@@ -576,6 +576,7 @@ MonoBehaviour:
   agent: {fileID: 6059965451871998538}
   stopOffset: 0.05
   rotationSpeed: 10
+  moveSpeed: 4
 --- !u!114 &4805159820700274270
 MonoBehaviour:
   m_ObjectHideFlags: 0

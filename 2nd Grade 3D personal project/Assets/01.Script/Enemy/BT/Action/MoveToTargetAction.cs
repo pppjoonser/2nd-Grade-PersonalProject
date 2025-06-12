@@ -17,5 +17,12 @@ public partial class MoveToTargetAction : Action
         Movement.Value.SetDestination(Target.Value.position);
         return Status.Success;
     }
+
+    protected override Status OnUpdate()
+    {
+        if (Target.Value == null)
+            return Status.Success;
+        return Status.Running;
+    }
 }
 
