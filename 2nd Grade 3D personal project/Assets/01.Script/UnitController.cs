@@ -15,6 +15,8 @@ public class UnitController : MonoBehaviour
     [SerializeField]
     private LayerMask floorLayers;
     [SerializeField]
+    private LayerMask enemyMask;
+    [SerializeField]
     private InputReader _input;
 
     private bool draging = false;
@@ -48,11 +50,18 @@ public class UnitController : MonoBehaviour
     {
         if(SelectionManager.Instance.SelectedUnits.Count > 0)
         {
-            if(Physics.Raycast(_camera.ScreenPointToRay(Mouse.current.position.value), out RaycastHit hit, Mathf.Infinity, floorLayers))
+            if (Physics.Raycast(_camera.ScreenPointToRay(Mouse.current.position.value), out RaycastHit enemyhit, Mathf.Infinity, enemyMask))
             {
-                foreach(SelectableUnit unit in SelectionManager.Instance.SelectedUnits)
+                foreach (SelectableUnit unit in SelectionManager.Instance.SelectedUnits)
                 {
-                    if(rotateOrderEnabled == false)
+                    unit.AttackTarget(enemyhit.transform);
+                }
+            }
+            else if (Physics.Raycast(_camera.ScreenPointToRay(Mouse.current.position.value), out RaycastHit hit, Mathf.Infinity, floorLayers))
+            {
+                foreach (SelectableUnit unit in SelectionManager.Instance.SelectedUnits)
+                {
+                    if (rotateOrderEnabled == false)
                     {
                         unit.MoveTo(hit.point);
                     }
@@ -63,6 +72,7 @@ public class UnitController : MonoBehaviour
                     rotateOrderEnabled = false;
                 }
             }
+           
         }
     }
 

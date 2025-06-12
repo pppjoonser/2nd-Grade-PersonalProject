@@ -3,16 +3,16 @@ using UnityEngine.AI;
 
 public class MoveState : EntityState
 {
-    private NavMeshAgent agent;
+    private NavMovement agent;
     public MoveState(Entity entity, int animationHash) : base(entity, animationHash)
     {
-        agent = entity.GetComponent<NavMeshAgent>();
+        agent = entity.GetComponent<NavMovement>();
     }
 
     public override void Update()
     {
         base.Update();
-        if(agent.remainingDistance < 0.2f)
+        if(agent.IsArrived)
         {
             _entity.ChageState("IDLE");
         }

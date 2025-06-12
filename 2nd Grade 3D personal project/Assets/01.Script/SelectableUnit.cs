@@ -8,14 +8,15 @@ using DG.Tweening;
 public class SelectableUnit : Entity
 {
     [SerializeField] private EventDataSO invenOpenEvent;
-    private NavMeshAgent _agent;
+    private NavMovement _agent;
     [SerializeField]
     private SpriteRenderer SelectionSprite;
     [SerializeField]
     private ItemSO[] items;
 
     [SerializeField] private StateDataSO[] states;
-    private float tempSpeed;
+
+    public Transform CurrentTarget { get; private set; }
 
     private EntityStateMachine stateMachine;
 
@@ -25,7 +26,7 @@ public class SelectableUnit : Entity
     {
         base.Awake();
         SelectionManager.Instance.AvilableUnits.Add(this);
-        _agent = GetComponent<NavMeshAgent>();
+        _agent = GetCompo<NavMovement>();
         stateMachine = new EntityStateMachine(this, states);
         invenOpenEvent.UnitItemSetting += SetItem;
     }
@@ -35,25 +36,29 @@ public class SelectableUnit : Entity
         this.items = items;
     }
 
+    public void AttackTarget(Transform target)
+    {
+        CurrentTarget = target;
+        stateMachine.ChangeState("CHASE");
+    }
+
     public void MoveTo(Vector3 position)
     {
-        _agent.speed = tempSpeed;
-        _agent.isStopped = false;
+        _agent.SetStop(false);
         _agent.SetDestination(position);
         stateMachine.ChangeState("MOVE");
     }
 
     public void RotateTo(Vector3 position)
     {
-        RotationDestination = position;
+        RotationDestination = position-transform.position;
+        _agent.SetStop(true);
         stateMachine.ChangeState("ROTATE");
     }
 
     protected override void Start()
     {
         stateMachine.ChangeState("IDLE");
-
-        tempSpeed = _agent.speed;
     }
 
     private void Update()
@@ -61,7 +66,7 @@ public class SelectableUnit : Entity
         stateMachine.UpdateStateMachine();
     }
 
-    public void ChageState(string statename) => stateMachine.ChangeState(statename);
+    public void ChageState(string statename, bool forced = false) => stateMachine.ChangeState(statename, forced);
 
     public void OnSelected()
     {

@@ -30,7 +30,7 @@ public class EntityChecker : MonoBehaviour, IEntityComponent
 
     [SerializeField, Range(0,1)] 
     private float meshResolution;
-    private void Awake()
+    protected virtual void Awake()
     {
         viewMesh = new Mesh();
         viewMesh.name = "FOV Mesh";
@@ -50,7 +50,7 @@ public class EntityChecker : MonoBehaviour, IEntityComponent
         }
     }
 
-    void LateUpdate()
+    protected virtual void LateUpdate()
     {
         DrawFieldOfView();
     }
@@ -64,7 +64,10 @@ public class EntityChecker : MonoBehaviour, IEntityComponent
             Transform calculatingTarget = target.transform;
             Vector3 dirToTarget = (calculatingTarget.position -transform.position).normalized;
             float searchingAngle = Mathf.Cos((SerchingAngle / 2) * Mathf.Deg2Rad);
-            bool isInAngle = Vector3.Dot(transform.forward, dirToTarget) > searchingAngle;
+
+            float dot = transform.forward.x * dirToTarget.x + transform.forward.y * dirToTarget.y + transform.forward.z * dirToTarget.z;
+            bool isInAngle = dot > searchingAngle;
+
             if(isInAngle)
             {
                 float destinationToTarget = Vector3.Distance(transform.position, calculatingTarget.position);
@@ -76,6 +79,21 @@ public class EntityChecker : MonoBehaviour, IEntityComponent
         }
     }
 
+    public Transform FindCloseTarget()
+    {
+        Transform min = null;
+        float mindis = _serchingRadius+1;
+        foreach(Transform target in visibleTargets)
+        {
+            float dis = Vector3.Distance(transform.position, target.position);
+            if (dis < mindis)
+            {
+                mindis = dis;
+                min = target;
+            }
+        }
+        return min;
+    }
     private void DrawFieldOfView()
     {
         int stepCount = Mathf.RoundToInt( _serchingAngle * meshResolution);
