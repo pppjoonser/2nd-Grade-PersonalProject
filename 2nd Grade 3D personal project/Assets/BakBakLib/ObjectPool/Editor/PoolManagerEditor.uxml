@@ -1,0 +1,17 @@
+<ui:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/BakBakLib/ObjectPool/Editor/PoolManagerEditor.uss?fileID=7433441132597879392&amp;guid=d536f613e9515f743bc0ffe7989f7c25&amp;type=3#PoolManagerEditor" />
+    <ui:VisualElement name="Container" style="flex-grow: 1; flex-direction: column; align-items: stretch; justify-content: flex-start;">
+        <ui:VisualElement name="TopBar" style="flex-grow: 0; align-items: center; flex-direction: row; justify-content: space-between;">
+            <ui:Label text="PoolManager Editor" name="TitleLabel" style="font-size: 25px; -unity-font-style: bold; text-shadow: 2px 2px 5px rgba(43, 43, 43, 0.13);" />
+            <ui:Button text="Create" name="CreateBtn" class="create_btn" />
+        </ui:VisualElement>
+        <BakBak.ObjectPool.Editor.GGMSplitView name="GGMSplitView" style="flex-direction: row; flex-grow: 1; align-self: auto;">
+            <ui:VisualElement name="LeftPanel" style="flex-grow: 1;">
+                <ui:ScrollView name="ItemView" />
+            </ui:VisualElement>
+            <ui:VisualElement name="RightPanel" style="flex-grow: 1; padding-top: 5px; padding-right: 5px; padding-bottom: 5px; padding-left: 5px;">
+                <ui:VisualElement name="InspectorView" style="flex-grow: 1;" />
+            </ui:VisualElement>
+        </BakBak.ObjectPool.Editor.GGMSplitView>
+    </ui:VisualElement>
+</ui:UXML>

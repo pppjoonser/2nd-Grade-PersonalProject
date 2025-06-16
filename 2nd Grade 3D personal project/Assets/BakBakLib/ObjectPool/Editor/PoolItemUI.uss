@@ -1,0 +1,63 @@
+.pool_item {
+    flex-grow: 0;
+    align-items: center;
+    flex-basis: 45px;
+    flex-direction: row;
+    justify-content: space-between;
+    align-self: auto;
+    border-left-color: rgb(125, 125, 125);
+    border-right-color: rgb(125, 125, 125);
+    border-top-color: rgb(125, 125, 125);
+    border-bottom-color: rgb(125, 125, 125);
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 1px;
+    border-left-width: 1px;
+    padding-right: 15px;
+    padding-left: 15px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+    transition-duration: 0.3s;
+}
+
+.pool_item:hover {
+    border-left-color: rgb(164, 164, 164);
+    border-right-color: rgb(164, 164, 164);
+    border-top-color: rgb(164, 164, 164);
+    border-bottom-color: rgb(164, 164, 164);
+    background-color: rgb(77, 77, 77);
+}
+
+.pool_item.active {
+    border-left-color: rgb(215, 215, 215);
+    border-right-color: rgb(215, 215, 215);
+    border-top-color: rgb(215, 215, 215);
+    border-bottom-color: rgb(215, 215, 215);
+    background-color: rgb(151, 151, 151);
+}
+
+.delete_btn {
+    background-color: rgb(148, 0, 0);
+    border-left-color: rgb(55, 0, 0);
+    border-right-color: rgb(55, 0, 0);
+    border-top-color: rgb(55, 0, 0);
+    border-bottom-color: rgb(35, 0, 0);
+}
+
+.delete_btn:hover {
+    background-color: rgb(186, 53, 53);
+    border-left-color: rgb(106, 0, 0);
+    border-right-color: rgb(106, 0, 0);
+    border-top-color: rgb(106, 0, 0);
+    border-bottom-color: rgb(69, 0, 0);
+}
+
+.title_label {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex-basis: 50px;
+    flex-grow: 1;
+    padding-right: 10px;
+}

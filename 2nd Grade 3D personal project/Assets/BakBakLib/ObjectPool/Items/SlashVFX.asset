@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 77210894c114b1943bdcdd4a06ddca73, type: 3}
-  m_Name: Health
+  m_Script: {fileID: 11500000, guid: acb4e59861aad2a4aa61d54489ad5569, type: 3}
+  m_Name: SlashVFX
   m_EditorClassIdentifier: 
-  value: 0
+  poolingName: SlashVFX
+  prefab: {fileID: 9032679558045313358, guid: d51d03b717232034eae14e7a0a80ff62, type: 3}
+  initCount: 3

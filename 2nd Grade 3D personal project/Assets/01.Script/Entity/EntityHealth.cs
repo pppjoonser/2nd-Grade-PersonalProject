@@ -22,8 +22,6 @@ using UnityEngine;
         {
             _actionData.HitPoint = hitPoint;
             _actionData.HitNormal = hitNormal;
-            //넉백은 나중에 처리한다.
-            //데미지도 나중에 처리한다.
 
             currentHealth = Mathf.Clamp(currentHealth - damage.damage, 0, maxhealth);
             if (currentHealth <= 0)

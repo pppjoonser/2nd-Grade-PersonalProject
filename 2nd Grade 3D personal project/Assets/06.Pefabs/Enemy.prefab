@@ -117,6 +117,7 @@ GameObject:
   - component: {fileID: 8372417773305249072}
   - component: {fileID: 4560396728527428285}
   - component: {fileID: 7753081961324585932}
+  - component: {fileID: -6241031815281761771}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Untagged
@@ -200,7 +201,7 @@ MonoBehaviour:
           m_Value0: 12338814848760456382
           m_Value1: 3037779151005626467
         Name: WayPoints
-        m_Value: {fileID: 0}
+        m_Value: {fileID: 6437081300464075244}
 --- !u!114 &8372417773305249072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,6 +261,20 @@ CapsuleCollider:
   m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 1.5, z: 0}
+--- !u!114 &-6241031815281761771
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3487166752285319192}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c31db1e0ac54a2642bd50a1dd4d009e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  hpStat: {fileID: 11400000, guid: adb84db957cfd64409ba451980290dd3, type: 2}
+  currentHealth: 50
 --- !u!1 &5618014191359949313
 GameObject:
   m_ObjectHideFlags: 0

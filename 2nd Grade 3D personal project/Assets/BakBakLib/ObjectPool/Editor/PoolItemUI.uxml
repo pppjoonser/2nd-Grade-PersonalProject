@@ -1,0 +1,7 @@
+<engine:UXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:engine="UnityEngine.UIElements" xmlns:editor="UnityEditor.UIElements" noNamespaceSchemaLocation="../../../../UIElementsSchema/UIElements.xsd" editor-extension-mode="True">
+    <Style src="project://database/Assets/BakBakLib/ObjectPool/Editor/PoolItemUI.uss?fileID=7433441132597879392&amp;guid=0b13bb73fccd23346903cf49a66cda1c&amp;type=3#PoolItemUI" />
+    <engine:VisualElement name="PoolItem" class="pool_item" style="align-self: stretch;">
+        <engine:Label text="Label" name="ItemName" class="title_label" />
+        <engine:Button text="X" name="DeleteBtn" class="delete_btn" />
+    </engine:VisualElement>
+</engine:UXML>

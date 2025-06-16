@@ -273,10 +273,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5eabf4d52aa52c24e8d0506d0b5219c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDataList: []
+  attackDataList:
+  - {fileID: 11400000, guid: d2d93ce472772e24291f9ed1a04511a3, type: 2}
   comboWindow: 0.7
   attackSpeedStat: {fileID: 0}
-  meleeDamageStat: {fileID: 0}
+  meleeDamageStat: {fileID: 11400000, guid: 8f4ce662cb01ef14f99f379cc9b72e00, type: 2}
   damageCaster: {fileID: 412065155041034332}
   useMouseDirection: 0
 --- !u!1 &6328743128728139821
@@ -590,7 +591,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hpStat: {fileID: 11400000, guid: 26f80c283e866144aa9e44cad1aba3cd, type: 2}
-  currentHealth: 0
+  currentHealth: 100
 --- !u!1 &7278016584603593610
 GameObject:
   m_ObjectHideFlags: 0
